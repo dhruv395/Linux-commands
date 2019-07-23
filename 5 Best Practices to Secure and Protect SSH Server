@@ -1,0 +1,81 @@
+me simple tools and tricks that will help you to tighten your ssh server security. Here you will find some useful information
+on how to secure and prevent ssh server from brute force and dictionary attacks. 
+
+1. DenyHosts 
+
+DenyHosts is an open source log-based intrusion prevention security script for SSH servers was written inpython programming
+language that intended to run by Linux system administrators and users to monitor and analyzes SSH server access logs for failed 
+login attempts knows as dictionary based attacks and brute force attacks. The script works by banning IP addresses after set number
+of failed login attempts and also prevent such attacks from gaining access to server. 
+
+DenyHosts Features 
+
+Keeps track of /var/log/secure to find all successful and failed login attempts and filters them. 
+
+Keeps eye on all failed login attempts by user and offending host. 
+
+Keeps watch on each existing and non-existent user (eg. xyz) when a failed login attempts. 
+
+Keeps track of each offending user, host and suspicious login attempts (If number of login failures) bans that host IP address
+by adding an entry in /etc/hosts.deny file. 
+
+Optionally sends an email notifications of newly blocked hosts and suspicious logins. 
+
+Also maintains all valid and invalid failed user login attempts in separate files, so that it makes easy for identifying which 
+valid or invalid user is under attack. So, that we can delete that account or change password or disable shell for that user. 
+
+ 
+
+2. Fail2Ban 
+
+Fail2ban is one of the most popular open source intrusion detection/prevention framework written in pythonprogramming language. 
+It operates by scanning log files such as /var/log/secure, /var/log/auth.log, /var/log/pwdfail etc. for too many failed login attempts.
+Fail2ban used to update Netfilter/iptables or TCP Wrapper’s hosts.deny file, to reject an attacker’s IP address for a set amount of time. It also has a ability to unban a blocked IP address for a certain period of time set by administrators. However, an certain minutes of unban is more enough to stop such malicious attacks. 
+
+Fail2Ban Features 
+
+Multi-threaded and Highly configurable. 
+
+Support for log files rotation and can handle multiple services like (sshd, vsftpd, apache, etc). 
+
+Monitors log files and looks for known and unknown patterns. 
+
+Uses Netfilter/Iptables and TCP Wrapper (/etc/hosts.deny) table to ban attackers IP. 
+
+Runs scripts when a given pattern has been identified for the same IP address for more than X times. 
+
+ 
+
+3. Disable Root Login 
+
+By default Linux systems are per-configured to allow ssh remote logins for everyone including root user itself, which allows 
+everyone to directly log in to system and gain root access. Despite the fact that ssh server allows a more secure way to disable 
+or enable root logins, it’s always a good idea to disable root access, keeping servers a bit more secure. 
+
+There are so many people trying to brute force root accounts via SSH attacks by simply supplying different account names and passwords,
+one after another. If you are a system administrator, you can check ssh server logs, where you will find number of failed login attempts. The main reason behind number of failed login attempts is having weak enough passwords and that makes sense for hackers/attackers to try. 
+
+If you are having strong passwords, then you’re probably safe, however it’s better to disable root login and have regular separate 
+account to log into, and then use sudo or su to gain root access whenever required. 
+
+ 
+
+4. Display SSH Banner 
+
+This is one of the oldest feature available from the beginning of the ssh project, but I’ve hardly seen it is used by anyone.
+Anyway I feels its important and very useful feature that I’ve used for all my Linux servers. 
+
+This is not for any security purpose, but the most greatest benefit of this banner is that it is used to display ssh warning 
+messages to UN-authorized access and welcome messages to authorized users before the password prompt and after the user logged in. 
+
+ 
+
+5. SSH Passwordless Login 
+
+A SSH Password-less login with SSH keygen will establish a trust relationship between two Linux servers which makes file transfer
+and synchronization much easier. This is very useful if you are dealing with remote automated backups, remote scripting execution, 
+file transfer, remote script management etc without enter passwrod each time. 
+
+ 
+
+From <https://www.tecmint.com/5-best-practices-to-secure-and-protect-ssh-server/>  
