@@ -1,0 +1,13 @@
+Module used: pam_listfile.so 
+
+PAM authentcation is based on the content of below files 
+
+/etc/ssh/ssh.allow --> List of users in this file will grant access 
+
+/etc/ssh/ssh.deny --> List of users within this file will block access  
+
+#vim /etc/pam.d/sshd 
+
+auth       required     pam_listfile.so         item=user       sense=deny      file=/etc/ssh/ssh.deny 
+
+#systemctl restart sshd 
