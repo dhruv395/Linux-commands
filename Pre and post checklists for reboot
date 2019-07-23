@@ -1,0 +1,107 @@
+Every Linux admin should know basic checklist before Linux Reboot 
+
+In this tutorial, we explain the checklist for Pre and Post Linux Reboot. Every Linux admin should know what all action/checklist 
+need to be performed before/after remote Linux server reboot. 
+
+Pre-reboot checklist for remote Linux 
+
+Note all running services on LinuxChecklist for Pre and Post Linux Reboot 
+
+ server, Optionally make sure the required service auto start on boot. 
+
+Check the current kernel version 
+
+Check the External disk/Volume attached to a Linux server and add external disk entry in /etc/fstab (this will automount 
+all disk after reboot) 
+
+Sanity-check and save the NTP system time synchronized 
+
+Make sure fsck won’t forced check ext3/4 filesystem on boot 
+
+Check If you have created any RAID either software/hardware Controller and check the RAID status 
+
+ 1 
+
+$ cat /proc/mdstat 
+
+Check if you can shutdown some of the services which will reduce system getting stuck on shutdown and it will quickly 
+perform reboot operation 
+
+Network traffic – this is Optional 
+
+Post-reboot checklist for remote Linux 
+
+Verify the service with the list which you have taken on pre-reboot. 
+
+Sanity-check – kernel version booted up, RAID status, system time, started service 
+
+Check system logs – syslogs, error logs 
+
+The command which is required for pre- / post-Linux reboot are as followed 
+
+Command to check/list all running services for CentOS/RHEL 6.x or older 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+service --status-all 
+
+service --status-all | more 
+
+service --status-all | grep ntpd 
+
+service --status-all | less 
+Command to check any service status for CentOS/RHEL 6.x or older 
+
+1 
+$ service <service-name> status 
+
+For example: 
+1 
+
+$ service httpd status 
+Command to list all service – config via sysv for CentOS/RHEL 6.x or older 
+
+1 
+$ chkconfig –list 
+Command to list the Linux service with ports for CentOS/RHEL 6.x or older 
+1 
+$ netstat -tulpn 
+Command to start/stop service for CentOS/RHEL 6.x or older 
+
+Syntax: 
+
+1 
+
+2 
+
+3 
+$ chkconfig <servicename> off 
+
+ $ chkconfig <servicename> on 
+
+For example: 
+
+1 
+
+2 
+
+3 
+
+$ chkconfig httpd off 
+
+ $ chkconfig httpd on 
+
+If you are using Latest Linux distro such asCentOS/RHEL 7.X, Fedora 22/23/24 +. Follow mention command to list all running 
+service using the systemctl command. 
