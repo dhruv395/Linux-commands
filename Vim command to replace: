@@ -1,0 +1,3 @@
+%s/search/replace/g 
+
+8,10 s/search/replace/g	: replace line 8 to 10  
