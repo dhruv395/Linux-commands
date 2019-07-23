@@ -1,0 +1,13 @@
+# df  -hT	: check for LVM 
+
+-umount  /lvm	:unmount the filesystem from mount point 
+
+-e2fsck   -f /dev/zoom/linux(deviceName)   : scan the file system b4 reducing 
+
+-resize2fs  /dev/zoom/linux  3G : e.g;reduced from 5G to 3G 
+
+-lvreduce -L  3G  /dev/zoom/linux 
+
+-mount /dev/zoom/linux  /lvm 
+
+-df -hT 
