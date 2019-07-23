@@ -1,0 +1,36 @@
+Syntax: 
+sed ‘s/term/replacement/flag’ file 
+
+ we will substitute the word and for an ampersand. At the same time, we will replace the word  
+I with You when the first one is found at the beginning of a line. 
+
+# sed 's/and/\&/g;s/^I/You/g' ahappychild.txt 
+
+ the first 5 lines of /var/log/messages from Jun 8. 
+# sed -n '/^Jun  8/ p' /var/log/messages | sed -n 1,5p 
+p--- print 
+
+ The following sed one-liner deletes (d) blank lines or those starting with # (the | character indicates a boolean OR between the two regular expressions). 
+ sed '/^#\|^$/d' apache2.conf 
+
+ want to print the entire file except a certain range. To exclude lines 20 through 35 from myfile.txt 
+# sed '20,35d' myfile.txt 
+
+ Let’s display lines 5-7 and 10-13 from myfile.txt: 
+# sed -n -e '5,7p' -e '10,13p' myfile.txt 
+
+ If you’re interested in replacing words only within a line range (30 through 40, for example),  
+# sed '30,40 s/version/story/g' myfile.txt 
+
+ let’s replace the word zip or Zip with rar in myfile.txt: 
+ sed 's/[Zz]ip/rar/g' myfile.txt 
+
+ 
+########### Sort Command: is used to sort lines of text files 
+du -sch /var/* | sort –h 
+
+ ###########uniq Command 
+The uniq command allows us to report or remove duplicate lines in a file,Thus, uniq is commonly used along with a preceding sort. 
+cat sortuniq.txt | cut -d: -f1 | sort | uniq 
+
+ 
