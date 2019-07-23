@@ -1,0 +1,6 @@
+To deny some packages, open the yum configuration file by   
+
+ # vim   /etc/yum.conf   command.   
+
+(iii) Gotolast line and type as,  exclude=*(all)  kernel*   ftp*     
+then save and exit this file.  (iv) Then  kernel*  and   ftp*   packages will be denied when we trying to install those packages. 
