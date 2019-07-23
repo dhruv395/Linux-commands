@@ -1,0 +1,29 @@
+"Ulimit" which allows you to display and set resource limits for users. The systems resources are defined in a file called
+"/etc/security/limits.conf 
+
+ To display the "Max user Processes", you could issue the command:
+ ulimit -u 
+
+ The hard limit is set by the "root" user or a user with the appropriate escalated privileges. This limit can not be exceeded.  
+The soft limit is also set by the "root" user, however, this limit can be overridden by a user using the "ulimit" command. 
+
+ 
+You can check the current value for opened files with the following command: 
+<https://www.tecmint.com/increase-set-open-file-limits-in-linux/>  
+$ cat /proc/sys/fs/file-max 
+
+to increase open file limit to 500000, you can use the following command as root: 
+# sysctl -w fs.file-max=500000 
+ 
+
+Temporary 
+# vi /etc/sysctl.conf 
+ 
+Permanent 
+fs.file-max=500000 
+
+ Add the line: 
+# sysctl -p 
+
+ 
+
