@@ -13,16 +13,13 @@ You can check the current value for opened files with the following command:
 $ cat /proc/sys/fs/file-max 
 
 to increase open file limit to 500000, you can use the following command as root: 
-# sysctl -w fs.file-max=500000 
- 
+Temporary:
+# sysctl -w fs.file-max=500000   
 
-Temporary 
+For  Permanent:
 # vi /etc/sysctl.conf 
- 
-Permanent 
-fs.file-max=500000 
+fs.file-max=500000  Add the line: 
 
- Add the line: 
 # sysctl -p 
 
  
