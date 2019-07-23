@@ -1,0 +1,110 @@
+ 
+
+RPM system consists of a local database, the rpm executable, rpm package 
+files. 
+
+ stores info about packages in a database /var/lib/rpm 
+
+/var/lib/rpm contains all the database necessary for managing all of the 
+
+packages installed on your system in the form of rpm. 
+
+The database stores information about installed packages such as file 
+
+attributes and package prerequisites. 
+
+When a certain system uses RPMs to install packages, a database of 
+
+installed packages is stored in /var/lib/rpm. 
+
+ The database itself is in rpmformat too, so it cannot be read directly. 
+
+ You will have to access the 
+
+database using the rpm command. 
+
+ Some Query Options 
+
+$ rpm -ivh {rpm-file} -->  Install the package 
+
+$ rpm -ivh mozilla-mail-1.7.5-17.i586.rpm 
+
+$ rpm -ivh --test mozilla-mail-1.7.5-17.i586.rpm 
+
+ $ rpm -Uvh {rpm-file}  --> Upgrade package 
+
+$ rpm -Uvh mozilla-mail-1.7.6-12.i586.rpm 
+
+$ rpm -Uvh --test mozilla-mail-1.7.6-12.i586.rpm 
+
+$ rpm -Fvh   -->upgrades to a later version 
+
+$ rpm -ev {package}  --> Erase/remove/ an installed package 
+
+$ rpm -ev mozilla-mail 
+
+$ rpm -ev --nodeps {package} Erase/remove/ an installed package without 
+
+checking for dependencies 
+
+$ rpm -ev --nodeps mozilla-mail 
+
+$ rpm -qa Display list all installed packages rpm -qa 
+
+$ rpm -qa | less 
+
+$ rpm -qi {package} Display installed information along with package 
+
+version and short description 
+
+$ rpm -qi mozilla-mail 
+
+$ rpm -qf {/path/to/file} Find out what package a file belongs to i.e. 
+
+find what package owns the file 
+
+$ rpm -qf /etc/passwd 
+
+rpm -qf /bin/bash 
+
+$ rpm -qc {pacakge-name} Display list of configuration file(s) for a 
+
+package 
+
+$ rpm -qc httpd 
+
+$ rpm -qcf {/path/to/file} Display list of configuration files for a 
+
+Command 
+
+$ rpm -qcf /usr/X11R6/bin/xeyes 
+
+$ rpm -qa --last Display list of all recently installed RPMs 
+
+$ rpm -qa --last 
+
+$ rpm -qa --last | less 
+
+$ rpm -qpR {.rpm-file} 
+
+$ rpm -qR {package} Find out what dependencies a rpm file has 
+
+$ rpm -qpR mediawiki-1.4rc1-4.i586.rpm 
+
+$ rpm -qR bash 
+
+$ rpm -qlp foo.rpm Which files are installed with foo.rpm? 
+
+$ rpm -ivh --nodeps pants.rpm Installing package Ignoring Dependencies 
+
+$ rpm -e foo ('e' for erase) 
+
+$ rpm -i --prefix /new/directory package.rpm The --prefix and --relocate 
+
+options should make the rpm command relocate a package to a new 
+
+location. 
+
+$ rpm -k <.rpm> we could verify the MD5 is OK 
+
+$ rpm --rebuilddb 
