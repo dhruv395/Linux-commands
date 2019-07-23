@@ -1,0 +1,76 @@
+SUID-SetUID 
+----------------- 
+Setuid allows a user to run an executable file with the permission of the file owner 
+
+Setting UID  
+
+chmod u+s file.txt 
+
+Numerical method: chmod 4750 file.txt 
+
+-rwS --- --- -->  Setuid , No execute permission 
+
+-rws --- --- --> Setuid + execute permission 
+
+-rwx --- --- --> No set uid , execute permission 
+
+Example:- passwd command 
+
+#ll /usr/bin 
+
+-rwsr-xr-x. 1 root root       27832 Jun 10  2014 passwd 
+
+If we run the passwd command , generally it modifies the /etc/shadow file for updating the passwd. But normal user don't have any permission over it. Because of setting SUID, the passwd command is always run as root user . 
+
+ SGID-SetGID 
+------------------ 
+
+Similar to SUID 
+
+Works on directories 
+
+File ownership is normally based on who created that file 
+
+In SGID directory files are owned by the group owner of the directory ... 
+
+Ie, group owner of the files will be same as the group owner of the SGID Directory 
+
+Setting GID 
+
+#chmod g+s directory 
+
+Numerical method : chmod 2000 directory 
+
+d--- --S --- --> SetGID, No execute permisiion 
+
+d--- --s --- --> SetUGID , Execute permission 
+
+D--- --x --- --> No SGID , execute permisiion 
+
+ 
+Sticky Bit 
+------------- 
+Sticky bit is used on folders to avoid file deletion by users who have write permisiion 
+
+When sticky bit is enabled , 
+
+Owner of file can delete it 
+
+Owner of directoy can delete it 
+
+Root can delete it 
+
+Enable Sticky bit 
+
+#chmod o+t directory 
+
+#chmod 1000 directory 
+
+D--- --- --T -->  Sticky bit + No execute permission 
+
+D--- --- --t --> Sticky bit + execute permission 
+
+ 
+Blocking SUID over a filesystem 
+------------------------------------------ 
+#mount -o nosuid /dev/xvdb1 
