@@ -1,0 +1,58 @@
+#mkdir /yumserver 
+#cd /run/media/root/RHEL-7.0\ Server.x86_64/ 
+#cp -rvf * /root/yumserver 
+#cd 
+#eject 
+#vim /etc/yum.repos.d/server.repo 
+
+[yum] 
+name=yumserver 
+baseurl=file:///yum 
+gpgcheck=0 
+enabled=1 
+
+ #yum clean all 
+#yum repolist al
+
+###to disable the yum repository. So, we cannot install any package from the repository.
+ # yum-config-manager  disablerepo=<repo id>  
+  
+###file to verify or see why the patch is not successfully installed.  
+  /var/log/yum.log  
+
+###to list all the information on all the repositories 
+ yum  repoinfo    
+
+###to list all the information on specified 
+ yum  repoinfo    <repo id>   
+
+###to display the list of all installed packages)  
+yum  list installed  
+
+ ###to display the information on that package)  
+ yum  info   <package name>   
+
+ ####if the update version of the specified package is available, 
+ # yum  update   <package name> 
+
+###to display the yum history
+ yum  history      
+
+####to display the information of that history id) 
+# yum  history  info   < id >   
+
+ 
+###to remove that history id)  
+  # yum  history  undo   < id >   
+
+  ###(to redo the above removed history id)  
+ # yum  history  undo   < id >   
+
+ 
+####(to display the list of group packages)
+# yum  grouplist    
+
+(####to install the group package)  
+ # yum  groupinstall <package name>  
+
+
