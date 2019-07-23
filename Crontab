@@ -1,0 +1,48 @@
+MIN HOUR DOM MON DOW CMD 
+
+Table: Crontab Fields and Allowed Ranges (Linux Crontab Syntax) 
+Field	Description	Allowed Value 
+
+MIN	Minute field	0 to 59 
+
+HOUR	Hour field	0 to 23 
+
+DOM	Day of Month	1-31 
+
+MON	Month field	1-12 
+
+DOW	Day Of Week	0-6 
+
+CMD	Command	Any command to be executed. 
+
+crontab -e    Edit crontab file, or create one if it doesn’t already exist. 
+
+crontab -l    crontab list of cronjobs , display crontab file contents. 
+
+crontab -r    Remove your crontab file. 
+
+crontab -v    Display the last time you edited your crontab file. (This option is only available on a few systems.) 
+
+ 5 * * * * = ever hour day at exactly 5min past the hour 
+
+*/5 * * * * = evey 5th minute so 00:05, 00:10, 00:15 and so on 
+
+ min	hour	day/month	month	day/week	Execution time 
+
+30	0	1	1,6,12	*	— 00:30 Hrs  on 1st of Jan, June & Dec. 
+
+0	20	*	10	1-5	–8.00 PM every weekday (Mon-Fri) only in Oct. 
+
+0	0	1,10,15	*	*	— midnight on 1st ,10th & 15th of month 
+
+5,10	0	10	*	1	— At 12.05,12.10 every Monday & on 10th of every month 
+
+ 
+To run something every minute: 
+* * * * * username /var/www/html/a.php 
+
+ To run something at midnight of every day: 
+0 0 * * * username /var/www/html/reset.php 
+
+ To collect the cron execution execution log in a file : 
+30 18 * * * rm /home/someuser/tmp/* > /home/someuser/cronlogs/clean_tmp_dir.log 
