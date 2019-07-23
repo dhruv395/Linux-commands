@@ -1,3 +1,6 @@
 ifconfig eno2:20 69.64.40.99 netmask 255.255.255.255 up 
 
 or> ip address add 192.168.99.37/24 dev eth0 
+
+find ip:- 
+ip addr |grep 'inet ' |tail -n +2  |awk '{print $2}'|cut -d/ -f1 |sed "s/secondary //g" 
