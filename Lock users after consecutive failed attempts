@@ -1,0 +1,9 @@
+Module: pam_tally 
+
+#vim /etc/pam.d/system-auth 
+
+  auth  required   pam_tally.so   onerr=fail  deny=5  unlock_time=300 
+
+#systemctl restart sshd 
+
+/var/log/faillog is used for login count 
