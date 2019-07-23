@@ -1,0 +1,28 @@
+dns name server 
+/etc/resolv.conf 
+
+ Config file: 
+/etc/sysconfig/network-scripts  
+
+ You can use: 
+the nmtui command and a Text User Interface, 
+the nmcli command at the Command Line Interface, 
+
+ 
+# nmcli con show 
+# nmcli dev status 
+# nmcli con del ethernet-eth0 
+#nmcli con add con-name eno16777736 type ethernet ifname eno16777736 ip4 192.168.5.1 gw4 192.168.5.1 
+
+ 
+inet 159.89.173.202/20 brd 159.89.175.255 scope global eth0 
+
+ #nmcli con up eno16777736 
+#nmcli con modify eno16777736 ipv4.addresses 192.168.5.11 
+#nmcli con show eno16777736 --------------- gives details of interface 
+nmcli con mod eno16777736 ipv4.method auto -------- to add ip through dhcp 
+#nmcli con del eno16777736 
+
+ #hostnamectl set-hostname server.example.com 
+
+ 
