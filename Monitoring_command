@@ -1,0 +1,101 @@
+ 
+
+TOP commands: 
+
+ 
+
+Process 'niceness' vs. 'priority' 
+
+ 
+
+Nice value is a user-space and priority PR is the process's actual priority that use by Linux kernel. In linux system priorities are 0 to 139 in which 0 to 99 for real time and 100 to 139 for users. nice value range is -20 to +19 where -20 is highest, 0 default and +19 is lowest. relation between nice value and priority is : 
+
+PR = 20 + NI  
+
+so , the value of PR = 20 + (-20 to +19) is 0 to 39 that maps 100 to 139. 
+
+An example of what I mean, two tasks, both have pr of 20, so equal, task one has a ni of 0 and task two has an ni of 20, so, this would mean that task two would give up resources for task one because it is nicer. 
+
+ 
+
+Steal time is the percentage of time a virtual CPU (vCPU) has to wait to run on a Physical CPU (pCPU) while the hypervisor is servicing another virtual CPU (vCPU). 
+
+ 
+
+ 
+
+usr: user cpu time (or) % CPU time spent in user space e.g; e.g like a command shell, an email server, or a compiler. 
+
+sys: system cpu time (or) % CPU time spent in kernel space e.g; servicing interrupts or managing resources. 
+
+nic: user nice cpu time (or) % CPU time spent on low priority processes  
+
+idle: idle cpu time (or) % CPU time spent idle 
+
+irq: hardware irq (or) % CPU time spent servicing/handling hardware interrupts  
+
+sirq: software irq (or) % CPU time spent servicing/handling software interrupts 
+
+ 
+
+ 
+
+The CPU line will look something like this: https://scoutapm.com/blog/understanding-linuxs-cpu-stats 
+
+%Cpu(s): 24.8 us,  0.5 sy,  0.0 ni, 73.6 id,  0.4 wa,  0.0 hi,  0.2 si,  0.0 st 
+
+24.8 us - the processor is spending 24.8% of its time running user space processes. A user space program is any process that doesn't belong to the kernel. Shells, compilers, databases, web servers, and the programs associated with the desktop are all user space processes. If the processor isn't idle, it is quite normal that the majority of the CPU time should be spent running user space processes. 
+
+73.6 id -   the processor was idle just over 73% of the time during the last sampling period. The total of the user space percentage - us, the niced percentage - ni, and the idle percentage - id, should be close to 100%. Which it is in this case. If the CPU is spending a more time in the other states then something is probably awry - see the Troubleshooting section below. 
+
+0.5 sy - This is the amount of time that the CPU spent running the kernel. All the processes and system resources are handled by the Linux kernel. When a user space process needs something from the system, for example when it needs to allocate memory, perform some I/O, or it needs to create a child process, then the kernel is running. In fact the scheduler itself which determines which process runs next is part of the kernel. The amount of time spent in the kernel should be as low as possible. In this case, just 0.5% of the time given to the different processes was spent in the kernel. This number can peak much higher, especially when there is a lot of I/O happening. 
+
+0.0 ni -  the priority level a user space process can be tweaked by adjusting its niceness. The ni stat shows how much time the CPU spent running user space processes that have been niced. On a system where no processes have been niced then the number will be 0. 
+
+0.4 wa - Input and output operations, like reading or writing to a disk, are slow compared to the speed of a CPU. Although this operations happen very fast compared to everyday human activities, they are still slow when compared to the performance of a CPU. There are times when the processor has initiated a read or write operation and then it has to wait for the result, but has nothing else to do. In other words it is idle while waiting for an I/O operation to complete. The time the CPU spends in this state is shown by the wa statistic. 
+
+0.0 hi & 0.2 si -  show how much time the processor has spent servicing interrupts. hi is for hardware interrupts, and si is for software interrupts. Hardware interrupts are physical interrupts sent to the CPU from various peripherals like disks and network interfaces. Software interrupts come from processes running on the system. A hardware interrupt will actually cause the CPU to stop what it is doing and go handle the interrupt. A software interrupt doesn't occur at the CPU level, but rather at the kernel level. 
+
+0.0 st - This last number only applies to virtual machines. When Linux is running as a virtual machine on a hypervisor, the st (short for stolen) statistic shows how long the virtual CPU has spent waiting for the hypervisor to service another virtual CPU running on a different virtual machine. Since in the real-world these virtual processors are sharing the same physical processor(s) then there will be times when the virtual machine wanted to run but the hypervisor scheduled another virtual machine instead. 
+
+ 
+
+RES- The non-swapped physical memory a task has used 
+SHR- The amount of shared memory used by a task 
+
+ 
+
+The status of the task which can be one of: 
+
+'D' = uninterruptible sleep 
+
+'R' = running 
+
+'S' = sleeping 
+
+'T' = traced or stopped 
+
+'Z' = zombie 
+
+ 
+
+ 
+
+Interpretting output of free: 
+The first line of the free output lists: 
+
+total Your total, physical (assuming no virtualization) memory 
+
+used How much of that is currently used (by anything) 
+
+free How much of that is completely free (not used at all) / the amount of memory which is currently not used for anything 
+
+shared (never anything there, ignore that column) 
+
+buffers Memory used by kernel buffers 
+
+cached Memory used for cache 
+
+ cache and buffers, is memory that is not allocated to specific user processes. It is memory reserved by the kernel to improve performance overall, but is not "application" memory. These areas will grow or shrink depending on kernel policies with respect to caching, memory pressure, application I/O patterns, etc. 
+
+ Available memory is the amount of memory which is available for allocation to a new process or to existing processes. 
